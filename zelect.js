@@ -14,7 +14,16 @@
     regexpMatcher:  function(term): override regexp creation when filtering options
     selectOnMouseEnter: set selection when hovering on an item
 */
-(function($) {
+
+(function (factory) {
+    if(typeof define === "function" && define.amd) {
+        define(["jquery"], factory);
+    } else if(typeof module === "object" && module.exports) {
+        module.exports = factory(require("jquery"));
+    } else {
+        factory(jQuery);
+    }
+}(function($) {
   var keys = { tab:9, enter:13, esc:27, left:37, up:38, right:39, down:40 }
   var defaults = {
     throttle: 300,
@@ -423,4 +432,4 @@
     }
     return { next:next, prev:prev, current:current, ensure:ensure }
   }
-})(jQuery)
+}))
